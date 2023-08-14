@@ -1,0 +1,806 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model HomeVM
+<main class="main">
+    <div class="page-content">
+        <section class="intro-section">
+            <div class="owl-carousel owl-theme row owl-nav-arrow owl-nav-fade  intro-slider mb-2 animation-slider cols-1 gutter-no"
+                 data-owl-options="{
+                        'nav': false,
+                        'dots': false,
+                        'loop': false,
+                        'items': 1,
+                        'autoplay': false,
+                        'responsive': {
+                            '992': {
+                                'nav': true
+                            }
+                        }
+                    }">
+                @foreach (var item in Model.Sliders)
+                {
+
+                    <div class="banner banner-fixed intro-slide1">
+                        <figure>
+                            @if (item.ImageUrl.StartsWith("http"))
+                            {
+                                <img src="@item.ImageUrl" alt="intro-banner" width="1903" height="912"
+                                     style="background-color: #f3f3f3" />
+                            }
+                            else
+                            {
+                                <img src="~/@item.ImageUrl" alt="intro-banner" width="1903" height="912"
+                                     style="background-color: #f3f3f3" />
+                            }
+                        </figure>
+                        <div class="container">
+                            <div class="banner-content y-50 d-block d-lg-flex align-items-center">
+                                @if (item.iSright == true)
+                                {
+                                    <div class="banner-content-right ml-lg-auto slide-animate" data-animation-options="{
+                                                                        'name': 'fadeInRightShorter', 'duration': '1s'
+                                                                    }">
+                                        <h4 class="banner-subtitle text-primary text-uppercase font-weight-bold">
+                                            @item.Title
+                                        </h4>
+                                        <h3 class="banner-title text-uppercase text-white font-weight-bold mb-6">
+                                            @item.Description
+                                        </h3>
+                                        <a href="demo7-shop.html" class="btn btn-dark btn-rounded">
+                                            @item.ButtonText<i class="d-icon-arrow-right"></i>
+                                        </a>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="slide-animate" data-animation-options="{
+                                                                                'name': 'fadeInRightShorter'
+                                                                            }">
+                                        <h4 class="banner-subtitle text-uppercase text-primary ls-s">
+                                            @item.Title
+                                        </h4>
+                                        <h3 class="banner-title text-dark ls-m">@item.Description</h3>
+
+                                        <a href="demo7-shop.html" class="btn btn-dark btn-rounded">
+                                            @item.ButtonText<i class="d-icon-arrow-right"></i>
+                                        </a>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="category-wrap row cols-lg-4 cols-sm-2 cols-1 gutter-sm">
+                <div class="category category-absolute category-banner appear-animate mb-2"
+                     data-animation-options="{
+                            'name': 'fadeInLeftShorter',
+                            'delay': '.4s'
+                        }">
+                    <a href="#">
+                        <figure class="category-media">
+                            <img src="~/Assets/images/demos/demo7/categories/1.jpg" alt="category" width="468"
+                                 height="320" />
+                        </figure>
+                    </a>
+                    <div class="category-content align-items-center x-50 w-100">
+                        <h4 class="category-name text-uppercase">All Star Nike Shoes</h4>
+                        <span class="category-count text-uppercase">
+                            <span>16</span> Products
+                        </span>
+                        <a href="demo7-shop.html" class="btn btn-underline btn-link">Shop Now</a>
+                    </div>
+                </div>
+
+                <div class="banner banner-fixed appear-animate mb-2" data-animation-options="{
+                            'name': 'fadeInLeftShorter',
+                            'delay': '.2s'
+                        }">
+                    <a href="#">
+                        <figure class="category-media">
+                            <img src="~/Assets/images/demos/demo7/categories/2.jpg" alt="category" width="468"
+                                 height="320" style="background-color: rgb(43, 43, 35);" />
+                        </figure>
+                    </a>
+                    <div class="banner-content text-center x-50 y-50 w-100">
+                        <h4 class="banner-subtitle text-uppercase text-primary font-weight-bold">Seasonal</h4>
+                        <h3 class="banner-title text-white ls-m">Clearance</h3>
+                        <p class="font-weight-semi-bold">Top 5 trends From Riode</p>
+                        <a href="demo7-shop.html" class="btn btn-white btn-link btn-underline">
+                            Shop Now<i class="d-icon-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="category category-absolute category-banner appear-animate mb-2"
+                     data-animation-options="{
+                            'name': 'fadeInRightShorter',
+                            'delay': '.2s'
+                        }">
+                    <a href="#">
+                        <figure class="category-media">
+                            <img src="~/Assets/images/demos/demo7/categories/3.jpg" alt="category" width="468"
+                                 height="320" />
+                        </figure>
+                    </a>
+                    <div class="category-content align-items-center x-50 w-100">
+                        <h4 class="category-name text-uppercase">All star Nike Shoes</h4>
+                        <span class="category-count text-uppercase">
+                            <span>16</span> Products
+                        </span>
+                        <a href="demo7-shop.html" class="btn btn-underline btn-link x-50">Shop Now</a>
+                    </div>
+                </div>
+
+                <div class="banner banner-fixed appear-animate mb-2" data-animation-options="{
+                            'name': 'fadeInRightShorter',
+                            'delay': '.4s'
+                        }">
+                    <a href="#">
+                        <figure class="category-media">
+                            <img src="~/Assets/images/demos/demo7/categories/4.jpg" alt="category" width="468"
+                                 height="320" style="background-color: rgb(196, 140, 92);" />
+                        </figure>
+                    </a>
+                    <div class="banner-content text-center x-50 y-50 w-100">
+                        <h4 class="banner-subtitle text-uppercase font-weight-bold">Seasonal</h4>
+                        <h3 class="banner-title text-white ls-m">The Latest</h3>
+                        <p class="font-weight-semi-bold text-white">Discover the new design</p>
+                        <a href="demo7-shop.html" class="btn btn-white btn-link btn-underline">
+                            Shop Now<i class="d-icon-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mt-10 pt-7 appear-animate" data-animation-options="{
+                    'delay': '.2s'
+                }">
+            <div class="container">
+                <h2 class="title title-center">Best Sellers</h2>
+                <div class="row">
+                    @foreach (var item in Model.Products)
+                    {
+                        <div class="col-lg-4 col-6 mb-4">
+                            <div class="product text-center">
+                                <figure class="product-media">
+                                    <a href="demo7-product.html">
+                                        <img src="@item.MainImage" alt="product" width="500"
+                                             height="345">
+                                    </a>
+                                    <div class="product-action-vertical">
+                                        <a href="#" class="btn-product-icon btn-cart" data-toggle="modal"
+                                           data-target="#addCartModal" title="Add to cart">
+                                            <i class="d-icon-bag"></i>
+                                        </a>
+                                        <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist">
+                                            <i class="d-icon-heart"></i>
+                                        </a>
+                                    </div>
+                                    <div class="product-action">
+                                        <a href="#" class="btn-product btn-quickview" title="Quick View">
+                                            Quick
+                                            View
+                                        </a>
+                                    </div>
+                                </figure>
+                                <div class="product-details">
+                                    <div class="product-cat">
+                                        <a href="demo7-shop.html">Shoes</a>
+                                    </div>
+                                    <h3 class="product-name">
+                                        <a href="demo7-product.html">@item.Name</a>
+                                    </h3>
+                                    <div class="product-price">
+                                        <ins class="new-price">$@item.Price</ins><del class="old-price">$210.00</del>
+                                    </div>
+                                    <div class="ratings-container">
+                                        <div class="ratings-full">
+                                            <span class="ratings" style="width:100%"></span>
+                                            <span class="tooltiptext tooltip-top"></span>
+                                        </div>
+                                        <a href="demo7-product.html" class="rating-reviews">( 6 reviews )</a>
+                                    </div>
+                                    <div class="product-variations">
+                                        <a class="color active" data-src="/Assets/images/demos/demo7/products/2.jpg"
+                                           href="#" style="background-color: #8f7a68"></a>
+                                        <a class="color" data-src="~/Assets/images/demos/demo7/products/1.jpg" href="#"
+                                           style="background-color: #fee2cf"></a>
+                                        <a class="color" data-src="/Assets/images/demos/demo7/products/3.jpg" href="#"
+                                           style="background-color: #9a999d"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </section>
+
+        <section class="banner-group pt-2 mt-10">
+            <div class="row cols-md-2 gutter-sm">
+                <div class="banner banner-fixed overlay-dark appear-animate">
+                    <figure>
+                        <img src="~/Assets/images/demos/demo7/banners/1.jpg" width="945" height="390" alt="banner" style="background-color: rgb(37, 38, 39);" />
+                    </figure>
+                    <div class="banner-content y-50">
+                        <div class="appear-animate" data-animation-options="{
+                                    'name': 'fadeInUpShorter',
+                                    'delay': '.2s'
+                                }">
+                            <h4 class="banner-subtitle text-uppercase text-primary font-weight-bold">
+                                Equipment
+                            </h4>
+                            <h3 class="banner-title text-white font-weight-bold mb-3">
+                                Highly Recommend
+                                Lifestyle Shoes
+                            </h3>
+                            <p class="font-weight-semi-bold mb-6">Start at &29.00</p>
+                            <a href="demo7-shop.html" class="btn btn-primary btn-rounded">
+                                Shop Now<i class="d-icon-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="banner banner-fixed overlay-dark appear-animate">
+                    <figure>
+                        <img src="~/Assets/images/demos/demo7/banners/2.jpg" width="945" height="390" alt="banner" style="background-color: rgb(236, 237, 239);" />
+                    </figure>
+                    <div class="banner-content y-50">
+                        <div class="appear-animate" data-animation-options="{
+                                    'name': 'fadeInUpShorter',
+                                    'delay': '.3s'
+                                }">
+                            <h4 class="banner-subtitle text-uppercase text-primary font-weight-bold">
+                                Bestseller
+                            </h4>
+                            <h3 class="banner-title font-weight-bold mb-3">
+                                Latest and Greatest Collection
+                                2021
+                            </h3>
+                            <p class="font-weight-semi-bold mb-6 text-body">Start at &29.00</p>
+                            <a href="demo7-shop.html" class="btn btn-dark btn-rounded">
+                                Shop Now<i class="d-icon-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="mt-10 pt-7 appear-animate" data-animation-options="{
+                    'delay': '.2s'
+                }">
+            <div class="container">
+                <h2 class="title title-center mb-6">Featured Item</h2>
+                <div class="product product-single row">
+                    <div class="col-md-6 product-gallery">
+                        <div class="rotate-slider owl-carousel product-single-carousel owl-theme owl-nav-arrow row gutter-no cols-1"
+                             data-owl-options="{
+                                    'nav': true,
+                                    'dots': false,
+                                    'loop': true
+                                }">
+                            <figure class="product-image">
+                                <img src="~/Assets/images/demos/demo7/products/big1.jpg"
+                                     data-zoom-image="images/demos/demo7/products/big1.jpg"
+                                     alt="Women's Brown Leather Backpacks" width="800" height="800">
+                            </figure>
+                            <figure class="product-image">
+                                <img src="~/Assets/images/demos/demo7/products/big2.jpg"
+                                     data-zoom-image="images/demos/demo7/products/big2.jpg"
+                                     alt="Women's Brown Leather Backpacks" width="800" height="800">
+                            </figure>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="product-details">
+                            <h2 class="product-name">
+                                <a href="demo7-product.html">North Face Training Wear</a>
+                            </h2>
+                            <div class="product-meta mb-3">
+                                SKU: <span class="product-sku">12345672</span>
+                                CATEGORY: <span class="product-cat text-capitalize">The North Face</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="price">$130.00</span>
+                            </div>
+                            <div class="ratings-container">
+                                <div class="ratings-full">
+                                    <span class="ratings" style="width:80%"></span>
+                                    <span class="tooltiptext tooltip-top"></span>
+                                </div>
+                                <a href="demo7-product.html" class="rating-reviews">( 1 reviews )</a>
+                            </div>
+
+                            <p class="product-short-desc font-primary">
+                                Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus
+                                metus
+                                libero eu augue. Morbi purus liberpuro ate vol faucibus adipiscing.
+                            </p>
+                            <hr class="product-divider">
+
+                            <div class="product-form product-qty">
+                                <div class="product-form-group">
+                                    <div class="input-group mr-2">
+                                        <button class="quantity-minus d-icon-minus"></button>
+                                        <input class="quantity form-control" type="number" min="1"
+                                               max="1000000">
+                                        <button class="quantity-plus d-icon-plus"></button>
+                                    </div>
+                                    <button class="btn-product btn-cart text-normal ls-normal font-weight-semi-bold">
+                                        <i class="d-icon-bag"></i>Add to
+                                        Cart
+                                    </button>
+                                </div>
+                            </div>
+
+                            <hr class="product-divider mb-3">
+
+                            <div class="product-footer">
+                                <div class="social-links mr-4">
+                                    <a href="#" class="social-link social-facebook fab fa-facebook-f"></a>
+                                    <a href="#" class="social-link social-twitter fab fa-twitter"></a>
+                                    <a href="#" class="social-link social-pinterest fab fa-pinterest-p"></a>
+                                </div>
+                                <span class="divider d-lg-show"></span>
+                                <a href="#" class="btn-product btn-wishlist mr-6">
+                                    <i class="d-icon-heart"></i>Add to
+                                    wishlist
+                                </a>
+                                <a href="#" class="btn-product btn-compare">
+                                    <i class="d-icon-compare"></i>Add
+                                    to
+                                    compare
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mt-7 appear-animate" data-animation-options="{
+                    'delay': '.2s'
+                }">
+            <div class="container">
+                <h2 class="title title-center">Trending Now</h2>
+                <div class="owl-carousel owl-theme row owl-nav-full owl-shadow-carousel cols-lg-4 cols-md-3 cols-2"
+                     data-owl-options="{
+                            'items': 4,
+                            'nav': false,
+                            'dots': true,
+                            'loop': false,
+                            'margin': 20,
+                            'responsive': {
+                                '0': {
+                                    'items': 2
+                                },
+                                '768': {
+                                    'items': 3
+                                },
+                                '992': {
+                                    'items': 4,
+                                    'nav': true,
+                                    'dots': false
+                                }
+                            }
+                        }">
+                    <div class="product text-center">
+                        <figure class="product-media">
+                            <a href="demo7-product.html">
+                                <img src="~/Assets/images/demos/demo7/products/6.jpg" alt="product" width="345"
+                                     height="255">
+                            </a>
+                            <div class="product-action-vertical">
+                                <a href="#" class="btn-product-icon btn-cart" data-toggle="modal"
+                                   data-target="#addCartModal" title="Add to cart">
+                                    <i class="d-icon-bag"></i>
+                                </a>
+                                <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist">
+                                    <i class="d-icon-heart"></i>
+                                </a>
+                            </div>
+                            <div class="product-action">
+                                <a href="#" class="btn-product btn-quickview" title="Quick View">Quick View</a>
+                            </div>
+                        </figure>
+                        <div class="product-details">
+                            <div class="product-cat">
+                                <a href="demo7-shop.html">Shoes</a>
+                            </div>
+                            <h3 class="product-name">
+                                <a href="demo7-product.html">Modern Football Boots</a>
+                            </h3>
+                            <div class="product-price">
+                                <ins class="new-price">$199.00</ins><del class="old-price">$210.00</del>
+                            </div>
+                            <div class="ratings-container">
+                                <div class="ratings-full">
+                                    <span class="ratings" style="width:100%"></span>
+                                    <span class="tooltiptext tooltip-top"></span>
+                                </div>
+                                <a href="demo7-product.html" class="rating-reviews">( 6 reviews )</a>
+                            </div>
+                            <div class="product-variations">
+                                <a class="color active" data-src="~/Assets/images/demos/demo7/products/6.jpg" href="#"
+                                   style="background-color: #8f7a68"></a>
+                                <a class="color" data-src="~/Assets/images/demos/demo7/products/2.jpg" href="#"
+                                   style="background-color: #fee2cf"></a>
+                                <a class="color" data-src="~/Assets/images/demos/demo7/products/3.jpg" href="#"
+                                   style="background-color: #9a999d"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product text-center">
+                        <figure class="product-media">
+                            <a href="demo7-product.html">
+                                <img src="~/Assets/images/demos/demo7/products/7.jpg" alt="product" width="345"
+                                     height="255">
+                            </a>
+                            <div class="product-action-vertical">
+                                <a href="#" class="btn-product-icon btn-cart" data-toggle="modal"
+                                   data-target="#addCartModal" title="Add to cart">
+                                    <i class="d-icon-bag"></i>
+                                </a>
+                                <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist">
+                                    <i class="d-icon-heart"></i>
+                                </a>
+                            </div>
+                            <div class="product-action">
+                                <a href="#" class="btn-product btn-quickview" title="Quick View">Quick View</a>
+                            </div>
+                        </figure>
+                        <div class="product-details">
+                            <div class="product-cat">
+                                <a href="demo7-shop.html">Shoes</a>
+                            </div>
+                            <h3 class="product-name">
+                                <a href="demo7-product.html">Strong Training Shoes</a>
+                            </h3>
+                            <div class="product-price">
+                                <ins class="new-price">$199.00</ins><del class="old-price">$210.00</del>
+                            </div>
+                            <div class="ratings-container">
+                                <div class="ratings-full">
+                                    <span class="ratings" style="width:100%"></span>
+                                    <span class="tooltiptext tooltip-top"></span>
+                                </div>
+                                <a href="demo7-product.html" class="rating-reviews">( 6 reviews )</a>
+                            </div>
+                            <div class="product-variations">
+                                <a class="color active" data-src="~/Assets/images/demos/demo7/products/7.jpg" href="#"
+                                   style="background-color: #8f7a68"></a>
+                                <a class="color" data-src="~/Assets/images/demos/demo7/products/2.jpg" href="#"
+                                   style="background-color: #fee2cf"></a>
+                                <a class="color" data-src="~/Assets/images/demos/demo7/products/3.jpg" href="#"
+                                   style="background-color: #9a999d"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product text-center">
+                        <figure class="product-media">
+                            <a href="demo7-product.html">
+                                <img src="~/Assets/images/demos/demo7/products/8.jpg" alt="product" width="345"
+                                     height="255">
+                            </a>
+                            <div class="product-action-vertical">
+                                <a href="#" class="btn-product-icon btn-cart" data-toggle="modal"
+                                   data-target="#addCartModal" title="Add to cart">
+                                    <i class="d-icon-bag"></i>
+                                </a>
+                                <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist">
+                                    <i class="d-icon-heart"></i>
+                                </a>
+                            </div>
+                            <div class="product-action">
+                                <a href="#" class="btn-product btn-quickview" title="Quick View">Quick View</a>
+                            </div>
+                        </figure>
+                        <div class="product-details">
+                            <div class="product-cat">
+                                <a href="demo7-shop.html">Shoes</a>
+                            </div>
+                            <h3 class="product-name">
+                                <a href="demo7-product.html">Fashion NIKE Training Shoes</a>
+                            </h3>
+                            <div class="product-price">
+                                <ins class="new-price">$199.00</ins><del class="old-price">$210.00</del>
+                            </div>
+                            <div class="ratings-container">
+                                <div class="ratings-full">
+                                    <span class="ratings" style="width:100%"></span>
+                                    <span class="tooltiptext tooltip-top"></span>
+                                </div>
+                                <a href="demo7-product.html" class="rating-reviews">( 6 reviews )</a>
+                            </div>
+                            <div class="product-variations">
+                                <a class="color active" data-src="~/Assets/images/demos/demo7/products/8.jpg" href="#"
+                                   style="background-color: #8f7a68"></a>
+                                <a class="color" data-src="~/Assets/images/demos/demo7/products/2.jpg" href="#"
+                                   style="background-color: #fee2cf"></a>
+                                <a class="color" data-src="~/Assets/images/demos/demo7/products/3.jpg" href="#"
+                                   style="background-color: #9a999d"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product text-center">
+                        <figure class="product-media">
+                            <a href="demo7-product.html">
+                                <img src="~/Assets/images/demos/demo7/products/9.jpg" alt="product" width="345"
+                                     height="255">
+                            </a>
+                            <div class="product-action-vertical">
+                                <a href="#" class="btn-product-icon btn-cart" data-toggle="modal"
+                                   data-target="#addCartModal" title="Add to cart">
+                                    <i class="d-icon-bag"></i>
+                                </a>
+                                <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist">
+                                    <i class="d-icon-heart"></i>
+                                </a>
+                            </div>
+                            <div class="product-action">
+                                <a href="#" class="btn-product btn-quickview" title="Quick View">Quick View</a>
+                            </div>
+                        </figure>
+                        <div class="product-details">
+                            <div class="product-cat">
+                                <a href="demo7-shop.html">Shoes</a>
+                            </div>
+                            <h3 class="product-name">
+                                <a href="demo7-product.html">Daisy Fashion Sonia Shoes</a>
+                            </h3>
+                            <div class="product-price">
+                                <ins class="new-price">$199.00</ins><del class="old-price">$210.00</del>
+                            </div>
+                            <div class="ratings-container">
+                                <div class="ratings-full">
+                                    <span class="ratings" style="width:100%"></span>
+                                    <span class="tooltiptext tooltip-top"></span>
+                                </div>
+                                <a href="demo7-product.html" class="rating-reviews">( 6 reviews )</a>
+                            </div>
+                            <div class="product-variations">
+                                <a class="color active" data-src="~/Assets/images/demos/demo7/products/9.jpg" href="#"
+                                   style="background-color: #8f7a68"></a>
+                                <a class="color" data-src="~/Assets/images/demos/demo7/products/2.jpg" href="#"
+                                   style="background-color: #fee2cf"></a>
+                                <a class="color" data-src="~/Assets/images/demos/demo7/products/3.jpg" href="#"
+                                   style="background-color: #9a999d"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mt-10 pt-6">
+            <div class="container">
+                <h2 class="title title-center">From Our Blog</h2>
+                <div class="owl-carousel owl-theme row cols-xl-4 cols-lg-3 cols-sm-2 cols-1" data-owl-options="{
+                            'items': 4,
+                            'dots': true,
+                            'nav': false,
+                            'loop': false,
+                            'margin': 20,
+                            'autoPlay': true,
+                            'responsive': {
+                                '0': {
+                                    'items': 1
+                                },
+                                '576': {
+                                    'items': 2
+                                },
+                                '992': {
+                                    'items': 3
+                                },
+                                '1200': {
+                                    'items': 4,
+                                    'dots': false
+                                }
+                            }
+                        }">
+                    <div class="post overlay-dark appear-animate" data-animation-options="{
+                                'name': 'fadeInRightShorter',
+                                'delay': '.2s'
+                            }">
+                        <figure class="post-media">
+                            <a href="post-single.html">
+                                <img src="~/Assets/images/demos/demo7/blog/1.jpg" width="370" height="255" alt="post" />
+                            </a>
+                        </figure>
+                        <div class="post-details">
+                            <div class="post-meta">
+                                on <a href="#" class="post-date">September 27, 2020</a>
+                                | <a href="#" class="post-comment"><span>2</span> Comments</a>
+                            </div>
+                            <h4 class="post-title">
+                                <a href="post-single.html">
+                                    Just a cool blog post with
+                                    Images
+                                </a>
+                            </h4>
+                            <p class="post-content">
+                                Londi m velnond ec tellus mass. facilisis
+                                quissapienfacilisis quis sapien.
+                            </p>
+                            <a href="post-single.html"
+                               class="btn btn-link btn-underline btn-primary btn-md">
+                                Read
+                                More<i class="d-icon-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="post overlay-dark appear-animate" data-animation-options="{
+                                'name': 'fadeInRightShorter',
+                                'delay': '.3s'
+                            }">
+                        <figure class="post-media">
+                            <a href="post-single.html">
+                                <img src="~/Assets/images/demos/demo7/blog/2.jpg" width="370" height="255" alt="post" />
+                            </a>
+                        </figure>
+                        <div class="post-details">
+                            <div class="post-meta">
+                                on <a href="#" class="post-date">September 27, 2020</a>
+                                | <a href="#" class="post-comment"><span>2</span> Comments</a>
+                            </div>
+                            <h4 class="post-title">
+                                <a href="post-single.html">
+                                    Just a cool blog post with
+                                    Images
+                                </a>
+                            </h4>
+                            <p class="post-content">
+                                Londi m velnond ec tellus mass. facilisis
+                                quissapienfacilisis quis sapien.
+                            </p>
+                            <a href="post-single.html"
+                               class="btn btn-link btn-underline btn-primary btn-md">
+                                Read
+                                More<i class="d-icon-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="post overlay-dark appear-animate" data-animation-options="{
+                                'name': 'fadeInRightShorter',
+                                'delay': '.4s'
+                            }">
+                        <figure class="post-media">
+                            <a href="post-single.html">
+                                <img src="~/Assets/images/demos/demo7/blog/3.jpg" width="370" height="255" alt="post" />
+                            </a>
+                        </figure>
+                        <div class="post-details">
+                            <div class="post-meta">
+                                on <a href="#" class="post-date">September 27, 2020</a>
+                                | <a href="#" class="post-comment"><span>2</span> Comments</a>
+                            </div>
+                            <h4 class="post-title">
+                                <a href="post-single.html">
+                                    Just a cool blog post with
+                                    Images
+                                </a>
+                            </h4>
+                            <p class="post-content">
+                                Londi m velnond ec tellus mass. facilisis
+                                quissapienfacilisis quis sapien.
+                            </p>
+                            <a href="post-single.html"
+                               class="btn btn-link btn-underline btn-primary btn-md">
+                                Read
+                                More<i class="d-icon-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="post overlay-dark appear-animate" data-animation-options="{
+                                'name': 'fadeInRightShorter',
+                                'delay': '.5s'
+                            }">
+                        <figure class="post-media">
+                            <a href="post-single.html">
+                                <img src="~/Assets/images/demos/demo7/blog/4.jpg" width="370" height="255" alt="post" />
+                            </a>
+                        </figure>
+                        <div class="post-details">
+                            <div class="post-meta">
+                                on <a href="#" class="post-date">September 27, 2020</a>
+                                | <a href="#" class="post-comment"><span>2</span> Comments</a>
+                            </div>
+                            <h4 class="post-title">
+                                <a href="post-single.html">
+                                    Just a cool blog post with
+                                    Images
+                                </a>
+                            </h4>
+                            <p class="post-content">
+                                Londi m velnond ec tellus mass. facilisis
+                                quissapienfacilisis quis sapien.
+                            </p>
+                            <a href="post-single.html"
+                               class="btn btn-link btn-underline btn-primary btn-md">
+                                Read
+                                More<i class="d-icon-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="instagram-section mt-10 pt-8 pb-8 mb-10 appear-animate" data-animation-options="{
+                    'delay': '.2s'
+                }">
+            <div class="container">
+                <h2 class="title title-center">Instagram</h2>
+                <div class="owl-carousel owl-theme row cols-xl-6 cols-lg-5 cols-md-4 cols-sm-3 cols-2 gutter-no"
+                     data-owl-options="{
+                            'items': 6,
+                            'nav': false,
+                            'dots': false,
+                            'autoplay': true,
+                            'autoplayTimeout': 5000,
+                            'responsive': {
+                                '0': {
+                                    'items': 2
+                                },
+                                '576': {
+                                    'items': 3
+                                },
+                                '768': {
+                                    'items': 4
+                                },
+                                '992': {
+                                    'items': 5
+                                },
+                                '1200': {
+                                    'items': 6
+                                }
+                            }
+                        }">
+                    <figure class="instagram">
+                        <a href="#">
+                            <img src="~/Assets/images/demos/demo7/instagram/1.jpg" alt="Instagram" width="257"
+                                 height="257" />
+                        </a>
+                    </figure>
+                    <figure class="instagram">
+                        <a href="#">
+                            <img src="~/Assets/images/demos/demo7/instagram/2.jpg" alt="Instagram" width="257"
+                                 height="257" />
+                        </a>
+                    </figure>
+                    <figure class="instagram">
+                        <a href="#">
+                            <img src="~/Assets/images/demos/demo7/instagram/3.jpg" alt="Instagram" width="257"
+                                 height="257" />
+                        </a>
+                    </figure>
+                    <figure class="instagram">
+                        <a href="#">
+                            <img src="~/Assets/images/demos/demo7/instagram/4.jpg" alt="Instagram" width="257"
+                                 height="257" />
+                        </a>
+                    </figure>
+                    <figure class="instagram">
+                        <a href="#">
+                            <img src="~/Assets/images/demos/demo7/instagram/5.jpg" alt="Instagram" width="257"
+                                 height="257" />
+                        </a>
+                    </figure>
+                    <figure class="instagram">
+                        <a href="#">
+                            <img src="~/Assets/images/demos/demo7/instagram/6.jpg" alt="Instagram" width="257"
+                                 height="257" />
+                        </a>
+                    </figure>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+<!-- End of Main -->

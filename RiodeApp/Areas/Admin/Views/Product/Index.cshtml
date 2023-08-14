@@ -1,0 +1,139 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+@model List<Product>
+
+<a asp-area="Admin" asp-controller="Product" asp-action="Create" class="btn btn-success mb-2">Create</a>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="table-responsive pt-3">
+                <table class="table table-striped project-orders-table">
+                    <thead>
+                        <tr>
+                            <th class="ml-5">ID</th>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Desctiption</th>
+                            <th>Price</th>
+                            <th>Discount</th>
+                            <th>Rating</th>
+                            <th>Stock Count</th>
+                            <th>Sales Count</th>
+                            <th colspan="2">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr @(item.IsDeleted ? "class=bg-danger" : "")>
+                                <td>@item.Id</td>
+                                @if (item.MainImage.StartsWith("http"))
+                                {
+                                    <td><img width="50" src="@item.MainImage" /></td>
+                                }
+                                else
+                                {
+                                    <td><img width="50" src="~/@item.MainImage" /></td>
+                                }
+                                <td>@item.Name</td>
+                                <td>
+                                    <span class="show">
+                                        @(item.Description.Length > 10 ? item.Description.Substring(0, 10) + " ..." : item.Description)
+                                    </span>
+                                    <span class="hide" style="display:none">
+                                        @item.Description
+                                    </span>
+                                </td>
+                                <td>@item.Price</td>
+                                <td>@item.Discount</td>
+                                <td>@item.Rating</td>
+                                <td>@item.StockCount</td>
+                                <td>@item.SalesCount</td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <a asp-area="Admin" asp-controller="Product"
+                                       asp-action="Update" asp-route-id="@item.Id"
+                                           type="button" class="btn btn-success btn-sm btn-icon-text mr-2">
+                                            Edit
+                                            <i class="typcn typcn-edit btn-icon-append"></i>
+                                        </a>
+                                        @if (!item.IsDeleted)
+                                        {
+                                            <a asp-area="Admin" asp-controller="Product"
+                                       asp-action="ChangeStatus" asp-route-id="@item.Id"
+                                               class="btn btn-primary btn-sm btn-icon-text delete-btn">
+                                                Delete
+                                                <i class="typcn typcn-delete-outline btn-icon-append"></i>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a asp-area="Admin" asp-controller="Product"
+                                       asp-action="ChangeStatus" asp-route-id="@item.Id"
+                                               class="btn btn-success btn-sm btn-icon-text delete-btn">
+                                                Restore
+                                                <i class="typcn typcn-delete-outline btn-icon-append"></i>
+                                            </a>
+                                        }
+                                        <a asp-area="Admin" asp-controller="Product"
+                                       asp-action="Delete" asp-route-id="@item.Id"
+                                           class="btn btn-danger btn-sm btn-icon-text delete-btn ml-1">
+                                            Remove
+                                            <i class="typcn typcn-delete-outline btn-icon-append"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if ((bool?)TempData["IsDeleted"] == true)
+    {
+        <script>
+            Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+            )
+        </script>
+    }
+    <script>
+        $(".delete-btn").click(e => {
+            e.preventDefault();
+            let url = e.target.href;
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = url;
+                }
+            })
+        })
+    </script>
+    <script>
+        $(document).ready(function () {
+            $(".show").click(function () {
+                $(this).hide();
+                $(this).siblings(".hide").show();
+            });
+
+            $(".hide").click(function () {
+                $(this).hide();
+                $(this).siblings(".show").show();
+            });
+        });
+    </script>
+    }

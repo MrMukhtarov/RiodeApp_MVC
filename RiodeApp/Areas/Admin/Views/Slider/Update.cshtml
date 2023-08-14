@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Update";
+}
+
+@model UpdateSliderGETVM
+
+<form method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="Title">Title</label>
+        <input asp-for="Title" class="form-control" placeholder="Title">
+        <span style="color:red" asp-validation-for="Title"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">Description</label>
+        <input asp-for="Description" class="form-control" placeholder="Description">
+        <span style="color:red" asp-validation-for="Description"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ButtonText">ButtonText</label>
+        <input asp-for="ButtonText" class="form-control" placeholder="ButtonText">
+        <span style="color:red" asp-validation-for="ButtonText"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="iSright">iSright</label>
+        <input asp-for="iSright" class="form-control" placeholder="iSright">
+        <span style="color:red" asp-validation-for="iSright"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ImageFile">
+            <img width="100" src="~/@Model.Image" />
+        </label>
+        <input asp-for="ImageFile" class="form-control" placeholder="ImageFile">
+        <span style="color:red" asp-validation-for="ImageFile"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
