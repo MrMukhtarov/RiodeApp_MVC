@@ -1,0 +1,26 @@
+﻿@model List<Category>
+
+<div class="category-wrap row cols-lg-4 cols-sm-2 cols-1 gutter-sm">
+    @foreach (var item in Model)
+    {
+        <div class="category category-absolute category-banner appear-animate mb-2"
+             data-animation-options="{
+                                'name': 'fadeInLeftShorter',
+                                'delay': '.4s'
+                            }">
+            <a href="#">
+                <figure class="category-media">
+                    <img src="~/Assets/images/demos/demo7/categories/1.jpg" alt="category" width="468"
+                         height="320" />
+                </figure>
+            </a>
+            <div class="category-content align-items-center x-50 w-100">
+                <h4 class="category-name text-uppercase">@item.Name</h4>
+                <span class="category-count text-uppercase">
+                    <span>16</span> Products
+                </span>
+                <a href="demo7-shop.html" class="btn btn-underline btn-link">Shop Now</a>
+            </div>
+        </div>
+    }
+</div>

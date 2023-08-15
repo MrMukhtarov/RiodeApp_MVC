@@ -22,4 +22,5 @@ public record CreateProductVM
     [Required, Range(0, Int32.MaxValue)]
     public int SalesCount { get; set; }
     public List<IFormFile>? ImageFiles { get; set; }
+    public List<int> CategoryIds { get; set; }
 }

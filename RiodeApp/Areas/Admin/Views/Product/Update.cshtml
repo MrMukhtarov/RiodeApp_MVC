@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Update";
 }
 @section styles{
@@ -24,6 +23,7 @@
                     padding: 5px;
                 }
     </style>
+    <link href="~/Assets/select2/css/select2.min.css" rel="stylesheet" />
 }
 
 @model UpdateProductGETVM
@@ -59,23 +59,29 @@
         <input asp-for="Rating" class="form-control" placeholder="Rating">
         <span style="color:red" asp-validation-for="Rating"></span>
     </div>
+    <div class="mb-3">
+        <label>Categories</label>
+        <select class="slctd w-100" asp-for="ProductCategoryIds" asp-items="@ViewBag.Categories" multiple="multiple">
+        </select>
+        <span class="text-danger" asp-validation-for="ProductCategoryIds"></span>
+    </div>
     <div class="form-group">
         <label asp-for="MainImageFile">
-            <img src="~/@Model.MainImageUrl" width="100" style="object-fit:cover" />
+            <img src="~/@Model?.MainImageUrl" width="100" style="object-fit:cover" />
         </label>
         <input asp-for="MainImageFile" class="form-control" placeholder="MainImageFile">
         <span style="color:red" asp-validation-for="MainImageFile"></span>
     </div>
     <div class="form-group">
         <label asp-for="ImageFiles" class="prod-imgs">
-            @if (Model.ProductImages != null)
+            @if (Model?.ProductImages != null)
             {
-                @foreach (var item in Model?.ProductImages)
+                @foreach (var item in Model.ProductImages)
                 {
-                   <div>
+                    <div>
                         <a asp-action="DeleteImage" asp-route-id="@item.Id" class="x-button">x</a>
-                        <img src="~/@item.Name" width="100" style="object-fit:cover"/>
-                   </div>
+                        <img src="~/@item.Name" width="100" style="object-fit:cover" />
+                    </div>
                 }
             }
         </label>
@@ -85,6 +91,14 @@
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 @section scripts{
+    <script src="~/Assets/select2/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.slctd').select2({
+                maximumSelectionLength: 4
+            });
+        });
+    </script>
     <script>
         $(".x-button").click(e => {
             e.preventDefault();

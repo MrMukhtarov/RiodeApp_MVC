@@ -20,4 +20,5 @@ public record UpdateProductVM
     [Required, Range(0, Int32.MaxValue)]
     public int StockCount { get; set; }
     public ICollection<IFormFile>? ProductImageFiles { get; set; }
+    public List<int> CategoryIds { get; set; }
 }

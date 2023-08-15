@@ -22,4 +22,5 @@ public record UpdateProductGETVM
     public string MainImageUrl { get; set; }
     public ICollection<IFormFile>? ImageFiles { get; set; }
     public ICollection<ProductImage> ProductImages { get; set; }
+    public List<int> ProductCategoryIds { get; set; }
 }

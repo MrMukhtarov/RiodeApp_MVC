@@ -21,4 +21,5 @@ public class Product : BaseEntity
     [Required,Range(0,Int32.MaxValue)]
     public int SalesCount { get; set; }
     public ICollection<ProductImage>? ProductImages { get; set; }
+    public ICollection<ProductCategory>? ProductCategories { get; set; }
 }

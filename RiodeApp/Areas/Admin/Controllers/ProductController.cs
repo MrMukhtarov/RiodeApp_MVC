@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RiodeApp.Extensions;
 using RiodeApp.Services.Interfaces;
@@ -9,17 +10,22 @@ namespace RiodeApp.Areas.Admin.Controllers;
 public class ProductController : Controller
 {
     readonly IProductService _productService;
+    readonly ICategoryService _categoryService;
 
-    public ProductController(IProductService productService)
+    public ProductController(IProductService productService,
+        ICategoryService categoryService)
     {
         _productService = productService;
+        _categoryService = categoryService;
     }
     public async Task<IActionResult> Index()
     {
-        return View(await _productService.GetAll(true));
+        return View(await _productService.GetTable.Include(p => p.ProductCategories).
+            ThenInclude(pc => pc.Category).ToListAsync());
     }
     public IActionResult Create()
     {
+        ViewBag.Categories = new SelectList(_categoryService.GetTable, "Id", "Name");
         return View();
     }
     [HttpPost]
@@ -50,16 +56,22 @@ public class ProductController : Controller
                 }
             }
         }
-        if (!ModelState.IsValid) return View();
+        if (!ModelState.IsValid)
+        {
+            ViewBag.Categories = new SelectList(_categoryService.GetTable, "Id", "Name");
+            return View();
+        }
         await _productService.Create(vm);
         return RedirectToAction(nameof(Index));
     }
     public async Task<IActionResult> Update(int? id)
     {
         if (id == null || id <= 0) return BadRequest();
-        var entity = await _productService.GetTable.Include(p => p.ProductImages).
+        var entity = await _productService.GetTable.Include(p => p.ProductImages).Include(p => p.ProductCategories).
             SingleOrDefaultAsync(p => p.Id == id);
         if (entity == null) return BadRequest();
+        ViewBag.Categories = new SelectList(_categoryService.GetTable, "Id", "Name");
+
         UpdateProductGETVM vm = new UpdateProductGETVM()
         {
             Name = entity.Name,
@@ -69,12 +81,13 @@ public class ProductController : Controller
             Rating = entity.Rating,
             StockCount = entity.StockCount,
             MainImageUrl = entity.MainImage,
-            ProductImages = entity.ProductImages
+            ProductImages = entity.ProductImages,
+            ProductCategoryIds = entity.ProductCategories.Select(p => p.CategoryId).ToList()
         };
-       return View(vm);
+        return View(vm);
     }
     [HttpPost]
-    public async Task<IActionResult> Update(UpdateProductGETVM vm,int? id)
+    public async Task<IActionResult> Update(UpdateProductGETVM vm, int? id)
     {
         if (id == null || id <= 0) return BadRequest();
         var entity = await _productService.GetTable.Include(p => p.ProductImages).
@@ -89,8 +102,18 @@ public class ProductController : Controller
             Rating = vm.Rating,
             StockCount = vm.StockCount,
             MainImageFile = vm.MainImageFile,
-            ProductImageFiles = vm.ImageFiles
+            ProductImageFiles = vm.ImageFiles,
+            CategoryIds = vm.ProductCategoryIds
         };
+        if (!ModelState.IsValid)
+        {
+            return View();
+        }
+        //if (vm.ProductCategoryIds == null)
+        //{
+        //    ViewBag.Categories = new SelectList(_categoryService.GetTable, "Id", "Name");
+        //    return View(vm);
+        //}
         await _productService.Update(upmv, id);
         return RedirectToAction(nameof(Index));
     }
@@ -105,7 +128,7 @@ public class ProductController : Controller
         if (id == null || id <= 0) return BadRequest();
         var entity = await _productService.GetTable.Include(p => p.ProductImages).
             SingleOrDefaultAsync(p => p.Id == id);
-        if(entity == null) return BadRequest();
+        if (entity == null) return BadRequest();
         await _productService.Delete(entity.Id);
         return RedirectToAction(nameof(Index));
     }

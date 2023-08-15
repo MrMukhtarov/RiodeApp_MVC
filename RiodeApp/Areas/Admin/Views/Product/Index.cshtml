@@ -18,6 +18,7 @@
                             <th>Price</th>
                             <th>Discount</th>
                             <th>Rating</th>
+                            <th>Categories</th>
                             <th>Stock Count</th>
                             <th>Sales Count</th>
                             <th colspan="2">Actions</th>
@@ -48,6 +49,12 @@
                                 <td>@item.Price</td>
                                 <td>@item.Discount</td>
                                 <td>@item.Rating</td>
+                                <td>
+                                    @foreach (var items in item.ProductCategories)
+                                    {
+                                        @items.Category?.Name <br/>
+                                    }
+                                </td>
                                 <td>@item.StockCount</td>
                                 <td>@item.SalesCount</td>
                                 <td>

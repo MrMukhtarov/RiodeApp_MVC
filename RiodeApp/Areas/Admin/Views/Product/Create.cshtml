@@ -1,6 +1,9 @@
 ﻿@{
     ViewData["Title"] = "Create";
 }
+@section styles{
+    <link href="~/Assets/select2/css/select2.min.css" rel="stylesheet" />
+}
 @model CreateProductVM
 
 <form method="post" enctype="multipart/form-data">
@@ -34,6 +37,12 @@
         <input asp-for="Rating" class="form-control" placeholder="Rating">
         <span style="color:red" asp-validation-for="Rating"></span>
     </div>
+    <div class="mb-3">
+        <label>Categories</label>
+        <select class="slct w-100" asp-for="CategoryIds" asp-items="@ViewBag.Categories" multiple="multiple">
+        </select>
+        <span class="text-danger" asp-validation-for="CategoryIds"></span>
+    </div>
     <div class="form-group">
         <label asp-for="MainImageFile">MainImageFile</label>
         <input asp-for="MainImageFile" class="form-control" placeholder="MainImageFile">
@@ -46,5 +55,15 @@
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
-
+@section scripts{
+    <script src="~/Assets/select2/js/select2.min.js"></script>
+    <partial name="_ValidationPartial" />
+    <script>
+        $(document).ready(function () {
+            $('.slct').select2({
+                maximumSelectionLength: 4
+            });
+        });
+    </script>
+}
 

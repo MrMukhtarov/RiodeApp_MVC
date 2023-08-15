@@ -11,11 +11,13 @@ public class ProductService : IProductService
 {
     readonly RiodeDbContext _context;
     readonly IFileService _fileService;
+    readonly ICategoryService _categoryService;
 
-    public ProductService(RiodeDbContext context, IFileService fileService)
+    public ProductService(RiodeDbContext context, IFileService fileService, ICategoryService categoryService)
     {
         _context = context;
         _fileService = fileService;
+        _categoryService = categoryService;
     }
     public IQueryable<Product> GetTable { get => _context.Set<Product>(); }
     public async Task<ICollection<Product>> GetAll(bool TakeAll)
@@ -44,6 +46,22 @@ public class ProductService : IProductService
     }
     public async Task Create(CreateProductVM vm)
     {
+        if(vm.CategoryIds.Count > 4)
+        {
+            throw new Exception();
+        }
+        if (!await _categoryService.IsAllExist(vm.CategoryIds))
+        {
+            throw new ArgumentException();
+        }
+        List<ProductCategory> prodCategories = new List<ProductCategory>();
+        foreach (var id in vm.CategoryIds)
+        {
+            prodCategories.Add(new ProductCategory
+            {
+                CategoryId = id,
+            });
+        }
         Product entity = new Product()
         {
             Name = vm.Name,
@@ -53,7 +71,8 @@ public class ProductService : IProductService
             Rating = vm.Rating,
             SalesCount = vm.SalesCount,
             StockCount = vm.StockCount,
-            MainImage = await _fileService.UploadAsync(vm.MainImageFile, Path.Combine("Assets", "imgs", "Products"))
+            MainImage = await _fileService.UploadAsync(vm.MainImageFile, Path.Combine("Assets", "imgs", "Products")),
+            ProductCategories = prodCategories
         };
         if (vm.ImageFiles != null)
         {
@@ -75,13 +94,41 @@ public class ProductService : IProductService
 
     public async Task Update(UpdateProductVM vm, int? id)
     {
-        var entity = await GetById(id);
+        if(vm.CategoryIds.Count > 4)
+        {
+            throw new Exception();
+        }
+        if(!await _categoryService.IsAllExist(vm.CategoryIds))
+        {
+            throw new ArgumentException();
+        }
+        List<ProductCategory> productCategories = new List<ProductCategory>();
+
+        foreach (var category in vm.CategoryIds)
+        {
+            productCategories.Add(new ProductCategory
+            {
+                CategoryId = category
+            });
+        }
+        var entity = await _context.Products.Include(p => p.ProductCategories).
+            SingleOrDefaultAsync(pc => pc.Id == id);
+        if(entity == null)
+        {
+            throw new NullReferenceException();
+        }
+        if(entity.ProductCategories != null)
+        {
+            entity.ProductCategories.Clear();
+        }
+
         entity.Name = vm.Name;
         entity.Description = vm.Description;
         entity.Price = vm.Price;
         entity.Discount = vm.Discount;
         entity.Rating = vm.Rating;
         entity.StockCount = vm.StockCount;
+        entity.ProductCategories = productCategories;
         if (vm.MainImageFile != null)
         {
             _fileService.Delete(entity.MainImage);
