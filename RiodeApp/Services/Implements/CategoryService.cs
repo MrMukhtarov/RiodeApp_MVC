@@ -22,7 +22,7 @@ public class CategoryService : ICategoryService
         {
             throw new Exception();
         }
-        Category pr = new Category() { Name =  vm.Name };
+        Category pr = new Category() { Name = vm.Name };
         await _context.AddAsync(pr);
         await _context.SaveChangesAsync();
     }
@@ -33,7 +33,10 @@ public class CategoryService : ICategoryService
         {
             return await _context.Categories.ToListAsync();
         }
-        return await _context.Categories.Where(c => c.IsDeleted == false).ToListAsync();
+        else
+        {
+            return await _context.Categories.Where(c => c.IsDeleted == false).ToListAsync();
+        }
     }
 
     public async Task<Category> GetById(int? id, bool takeAll = false)
@@ -62,7 +65,7 @@ public class CategoryService : ICategoryService
     {
         foreach (var id in ids)
         {
-            if(!await IsExist(id))
+            if (!await IsExist(id))
             {
                 return false;
             }
@@ -73,5 +76,33 @@ public class CategoryService : ICategoryService
     public async Task<bool> IsExist(int id)
     {
         return await _context.Categories.AnyAsync(c => c.Id == id);
+    }
+
+    public async Task Delete(int? id)
+    {
+        var entity = await GetById(id);
+        var productsWithCategory = await _context.Products
+         .Where(p => p.ProductCategories.Any(pc => pc.CategoryId == id))
+         .ToListAsync();
+        if (productsWithCategory.Count > 0)
+        {
+            throw new Exception();
+        }
+        _context.Categories.Remove(entity);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task SoftDelete(int? id)
+    {
+        var entity = await GetById(id, true);
+        var productsWithCategory = await _context.Products
+        .Where(p => p.ProductCategories.Any(pc => pc.CategoryId == id))
+        .ToListAsync();
+        if (productsWithCategory.Count > 0)
+        {
+            throw new Exception();
+        }
+        entity.IsDeleted = !entity.IsDeleted;
+        await _context.SaveChangesAsync();
     }
 }

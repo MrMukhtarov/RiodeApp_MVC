@@ -12,4 +12,6 @@ public class RiodeDbContext : DbContext
     public DbSet<ProductImage> ProductImages { get; set; }
     public DbSet<Category> Categories { get; set; }
     public DbSet<ProductCategory> ProductCategories { get; set; }
+    public DbSet<Color> Colors { get; set; }
+    public DbSet<ProductColor> ProductColors { get; set; }
 }

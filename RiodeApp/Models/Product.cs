@@ -22,4 +22,5 @@ public class Product : BaseEntity
     public int SalesCount { get; set; }
     public ICollection<ProductImage>? ProductImages { get; set; }
     public ICollection<ProductCategory>? ProductCategories { get; set; }
+    public ICollection<ProductColor>? ProductColors { get; set; }
 }

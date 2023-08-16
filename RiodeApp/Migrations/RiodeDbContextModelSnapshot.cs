@@ -41,6 +41,26 @@ namespace RiodeApp.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("RiodeApp.Models.Color", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ColorCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Colors");
+                });
+
             modelBuilder.Entity("RiodeApp.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -108,6 +128,32 @@ namespace RiodeApp.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductCategories");
+                });
+
+            modelBuilder.Entity("RiodeApp.Models.ProductColor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("ColorId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ColorId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductColors");
                 });
 
             modelBuilder.Entity("RiodeApp.Models.ProductImage", b =>
@@ -192,6 +238,25 @@ namespace RiodeApp.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("RiodeApp.Models.ProductColor", b =>
+                {
+                    b.HasOne("RiodeApp.Models.Color", "Cplor")
+                        .WithMany("ProductColors")
+                        .HasForeignKey("ColorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RiodeApp.Models.Product", "Product")
+                        .WithMany("ProductColors")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cplor");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("RiodeApp.Models.ProductImage", b =>
                 {
                     b.HasOne("RiodeApp.Models.Product", "Product")
@@ -208,9 +273,16 @@ namespace RiodeApp.Migrations
                     b.Navigation("ProductCategories");
                 });
 
+            modelBuilder.Entity("RiodeApp.Models.Color", b =>
+                {
+                    b.Navigation("ProductColors");
+                });
+
             modelBuilder.Entity("RiodeApp.Models.Product", b =>
                 {
                     b.Navigation("ProductCategories");
+
+                    b.Navigation("ProductColors");
 
                     b.Navigation("ProductImages");
                 });

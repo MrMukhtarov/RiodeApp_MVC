@@ -192,7 +192,7 @@
             <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
                 <ul class="navbar-nav mr-lg-2">
                     <li class="nav-item ml-0">
-                        <h4 class="mb-0">Dashboard</h4>
+                        <a style="text-decoration:none;color:white;font-size:20px" asp-action="Index" asp-area="" asp-controller="Home" class="mb-0">Dashboard</a>
                     </li>
                     <li class="nav-item">
                         <div class="d-flex align-items-baseline">
@@ -407,6 +407,13 @@
                         <a class="nav-link" asp-area="Admin" asp-action="Index" asp-controller="Category">
                             <i class="typcn typcn-device-desktop menu-icon"></i>
                             <span class="menu-title">Category</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="Admin" asp-action="Index" asp-controller="Color">
+                            <i class="typcn typcn-device-desktop menu-icon"></i>
+                            <span class="menu-title">Color</span>
                         </a>
                     </li>
                 </ul>

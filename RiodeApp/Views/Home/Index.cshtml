@@ -87,7 +87,7 @@
                         <div class="col-lg-4 col-6 mb-4">
                             <div class="product text-center">
                                 <figure class="product-media">
-                                    <a href="demo7-product.html">
+                                    <a asp-action="Detail" asp-controller="Shop" asp-route-id="@item.Id">
                                         <img src="@item.MainImage" alt="product" width="500"
                                              height="345">
                                     </a>
@@ -112,7 +112,7 @@
                                         <a href="demo7-shop.html">Shoes</a>
                                     </div>
                                     <h3 class="product-name">
-                                        <a href="demo7-product.html">@item.Name</a>
+                                        <a asp-action="Detail" asp-controller="Shop" asp-route-id="@item.Id">@item.Name</a>
                                     </h3>
                                     <div class="product-price">
                                         <ins class="new-price">$@item.Price</ins><del class="old-price">$210.00</del>

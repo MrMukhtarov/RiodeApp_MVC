@@ -87,6 +87,7 @@
         </label>
         <input asp-for="ImageFiles" class="form-control" placeholder="ImageFiles">
         <span style="color:red" asp-validation-for="ImageFiles"></span>
+       <div class="text-danger" asp-validation-summary="ModelOnly">
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

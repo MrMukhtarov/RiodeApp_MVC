@@ -5,6 +5,7 @@
         <label asp-for="Name">Name</label>
         <input asp-for="Name" class="form-control" placeholder="Name">
         <span style="color:red" asp-validation-for="Name"></span>
+        <span style="color:red">@ViewBag.SameName</span>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

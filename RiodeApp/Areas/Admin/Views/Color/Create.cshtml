@@ -1,0 +1,13 @@
+﻿@model CreateColorVM
+
+<form method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="ColorCode">ColorCode</label>
+        <input asp-for="ColorCode" class="form-control" placeholder="ColorCode">
+        <span style="color:red" asp-validation-for="ColorCode"></span>
+        <span style="color:red">@ViewBag.SameName</span>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+

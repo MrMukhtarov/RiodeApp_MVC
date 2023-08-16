@@ -12,4 +12,6 @@ public interface ICategoryService
     Task Update(int? id, UpdateCategoryVm vm);
     Task<bool> IsExist(int id);
     Task<bool> IsAllExist(List<int> ids);
+    Task Delete(int? id);
+    Task SoftDelete(int? id);
 }

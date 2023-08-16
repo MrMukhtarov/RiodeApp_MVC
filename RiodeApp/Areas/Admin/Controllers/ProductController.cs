@@ -105,15 +105,7 @@ public class ProductController : Controller
             ProductImageFiles = vm.ImageFiles,
             CategoryIds = vm.ProductCategoryIds
         };
-        if (!ModelState.IsValid)
-        {
-            return View();
-        }
-        //if (vm.ProductCategoryIds == null)
-        //{
-        //    ViewBag.Categories = new SelectList(_categoryService.GetTable, "Id", "Name");
-        //    return View(vm);
-        //}
+        
         await _productService.Update(upmv, id);
         return RedirectToAction(nameof(Index));
     }

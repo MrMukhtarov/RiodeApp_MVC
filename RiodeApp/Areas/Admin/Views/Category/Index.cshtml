@@ -21,7 +21,10 @@
                         {
                             <tr @(item.IsDeleted ? "class=bg-danger" : "")>
                                 <td>@item.Id</td>
-                                <td>@item.Name</td>
+                                <td>
+                                    @item.Name
+                                 
+                                 </td>
                                 <td>
                                     <div class="d-flex align-items-center">
                                         <a asp-area="Admin" asp-controller="Category"
@@ -58,6 +61,10 @@
                                 </td>
                             </tr>
                         }
+                            @if (TempData["HaveProduct"] != null)
+                            {
+                                <span style="color:red">@TempData["HaveProduct"]</span>
+                            }
                     </tbody>
                 </table>
             </div>
