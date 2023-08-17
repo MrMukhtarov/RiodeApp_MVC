@@ -55,10 +55,10 @@ public class SliderController : Controller
         return View(vm);
     }
     [HttpPost]
-    public async Task<IActionResult> Update(int? id, UpdateSliderGETVM vm)
+    public async Task<IActionResult> Update(UpdateSliderGETVM vm, int? id)
     {
         if (id == null || id <= 0) return BadRequest();
-        var entity = _sliderService.GetById(id);
+        var entity = await _sliderService.GetById(id);
         UpdateSliderVM upvm = new UpdateSliderVM
         {
             Title = vm.Title,

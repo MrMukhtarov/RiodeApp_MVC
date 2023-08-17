@@ -99,7 +99,7 @@
                                     <div class="product-price">
                                         @if (item.Discount > 0)
                                         {
-                                            <ins class="new-price">$@(item.Price - (item.Price * item.Discount / 100))</ins>
+                                            <ins class="new-price">$@String.Format("{0:0.00}",@item.Price - (item.Price * item.Discount / 100))</ins>
                                             <del class="old-price">$@item.Price</del>
                                         }
                                         else

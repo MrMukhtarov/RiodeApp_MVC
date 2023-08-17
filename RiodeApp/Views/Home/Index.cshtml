@@ -3,6 +3,7 @@
 }
 @model HomeVM
 <main class="main">
+    <input type="hidden" value="@ViewBag.ProductCount" id="prodCount">
     <div class="page-content">
         <section class="intro-section">
             <div class="owl-carousel owl-theme row owl-nav-arrow owl-nav-fade  intro-slider mb-2 animation-slider cols-1 gutter-no"
@@ -81,61 +82,8 @@
                 }">
             <div class="container">
                 <h2 class="title title-center">Best Sellers</h2>
-                <div class="row">
-                    @foreach (var item in Model.Products)
-                    {
-                        <div class="col-lg-4 col-6 mb-4">
-                            <div class="product text-center">
-                                <figure class="product-media">
-                                    <a asp-action="Detail" asp-controller="Shop" asp-route-id="@item.Id">
-                                        <img src="@item.MainImage" alt="product" width="500"
-                                             height="345">
-                                    </a>
-                                    <div class="product-action-vertical">
-                                        <a href="#" class="btn-product-icon btn-cart" data-toggle="modal"
-                                           data-target="#addCartModal" title="Add to cart">
-                                            <i class="d-icon-bag"></i>
-                                        </a>
-                                        <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist">
-                                            <i class="d-icon-heart"></i>
-                                        </a>
-                                    </div>
-                                    <div class="product-action">
-                                        <a href="#" class="btn-product btn-quickview" title="Quick View">
-                                            Quick
-                                            View
-                                        </a>
-                                    </div>
-                                </figure>
-                                <div class="product-details">
-                                    <div class="product-cat">
-                                        <a href="demo7-shop.html">Shoes</a>
-                                    </div>
-                                    <h3 class="product-name">
-                                        <a asp-action="Detail" asp-controller="Shop" asp-route-id="@item.Id">@item.Name</a>
-                                    </h3>
-                                    <div class="product-price">
-                                        <ins class="new-price">$@item.Price</ins><del class="old-price">$210.00</del>
-                                    </div>
-                                    <div class="ratings-container">
-                                        <div class="ratings-full">
-                                            <span class="ratings" style="width:100%"></span>
-                                            <span class="tooltiptext tooltip-top"></span>
-                                        </div>
-                                        <a href="demo7-product.html" class="rating-reviews">( 6 reviews )</a>
-                                    </div>
-                                    <div class="product-variations">
-                                        <a class="color active" data-src="/Assets/images/demos/demo7/products/2.jpg"
-                                           href="#" style="background-color: #8f7a68"></a>
-                                        <a class="color" data-src="~/Assets/images/demos/demo7/products/1.jpg" href="#"
-                                           style="background-color: #fee2cf"></a>
-                                        <a class="color" data-src="/Assets/images/demos/demo7/products/3.jpg" href="#"
-                                           style="background-color: #9a999d"></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    }
+                <div class="row" id="myTabContent">
+                   <partial name="_ProductPartial" model="Model.Products"/>
                 </div>
             </div>
         </section>
@@ -725,3 +673,108 @@
     </div>
 </main>
 <!-- End of Main -->
+@section scripts{
+    @*<script>
+        let take = 4;
+        let skip = 4;
+        $(".load-more").click(e => {
+            e.preventDefault();
+            if ($('#prodCount').val() == $('.feat-prod').length) {
+                e.target.remove()
+            }
+            else {
+                fetch(`${e.target.href}?take=${take}&skip=${skip}`)
+                    .then(data => data.text())
+                    .then(res => {
+                        $(".featured--div").append(res)
+                        skip += 4;
+                        if ($('#prodCount').val() == $('.feat-prod').length) {
+                            e.target.remove()
+                        }
+                    })
+                    .catch(e => console.log(e))
+            }
+
+        })
+    </script>*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        let prods = document.querySelectorAll(".feat-prod .d-icon-bagt");
+        document.getElementById('myTabContent').addEventListener("click", e => {
+            e.preventDefault();
+            if (e.srcElement.classList.contains("d-icon-bag")) {
+                fetch(e.target.parentElement.href)
+                    .then(res => {
+                        if (res.ok) {
+                            let count = document.getElementById("basketCount").innerText;
+                            document.getElementById("basketCount").innerText = ++count;
+                            Command: toastr["success"]("Səbətə əlavə olundu")
+
+                            toastr.options = {
+                                "closeButton": false,
+                                "debug": false,
+                                "newestOnTop": false,
+                                "progressBar": false,
+                                "positionClass": "toast-top-right",
+                                "preventDuplicates": false,
+                                "onclick": null,
+                                "showDuration": "300",
+                                "hideDuration": "1000",
+                                "timeOut": "5000",
+                                "extendedTimeOut": "1000",
+                                "showEasing": "swing",
+                                "hideEasing": "linear",
+                                "showMethod": "fadeIn",
+                                "hideMethod": "fadeOut"
+                            }
+                        }
+                        else {
+                            Command: toastr["error"]("Bir xəta baş verdi -else")
+
+                            toastr.options = {
+                                "closeButton": false,
+                                "debug": false,
+                                "newestOnTop": false,
+                                "progressBar": false,
+                                "positionClass": "toast-top-right",
+                                "preventDuplicates": false,
+                                "onclick": null,
+                                "showDuration": "300",
+                                "hideDuration": "1000",
+                                "timeOut": "5000",
+                                "extendedTimeOut": "1000",
+                                "showEasing": "swing",
+                                "hideEasing": "linear",
+                                "showMethod": "fadeIn",
+                                "hideMethod": "fadeOut"
+                            }
+                        }
+                    })
+                    .catch(() => {
+                        Command: toastr["error"]("Bir xəta baş verdi -catch")
+
+                        toastr.options = {
+                            "closeButton": false,
+                            "debug": false,
+                            "newestOnTop": false,
+                            "progressBar": false,
+                            "positionClass": "toast-top-right",
+                            "preventDuplicates": false,
+                            "onclick": null,
+                            "showDuration": "300",
+                            "hideDuration": "1000",
+                            "timeOut": "5000",
+                            "extendedTimeOut": "1000",
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        }
+                    })
+            }
+            if (e.target.tagName.toLowerCase() === 'a') {
+                window.location.href = e.target.href;
+            }
+        })
+    </script>
+}

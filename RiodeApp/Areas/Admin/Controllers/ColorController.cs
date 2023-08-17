@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using RiodeApp.Services.Implements;
 using RiodeApp.Services.Interfaces;
 using RiodeApp.ViewModels.ColorVMs;
 
@@ -60,5 +61,19 @@ public class ColorController : Controller
         }
         await _colorServoce.Update(id, upvm);
         return RedirectToAction(nameof(Index));
+    }
+    public async Task<IActionResult> Delete(int? id)
+    {
+        if (id == null || id <= 0) return BadRequest();
+        try
+        {
+            await _colorServoce.Delete(id);
+            return RedirectToAction(nameof(Index));
+        }
+        catch
+        {
+            TempData["HaveProduct"] = "You have a product in this color. First, delete the product, and then delete the color";
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
