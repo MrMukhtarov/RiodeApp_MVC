@@ -38,7 +38,7 @@ public class HomeController : Controller
         if (id == null || id <= 0) return BadRequest();
         if (!await _productService.GetTable.AnyAsync(p => p.Id == id)) return BadRequest();
         var basket = HttpContext.Request.Cookies["basket"];
-        List<BasketItemVM> items = basket == null ? new List<BasketItemVM>() :
+        List<BasketItemVM> items = basket == null ? new List<BasketItemVM>():
             JsonConvert.DeserializeObject<List<BasketItemVM>>(basket);
         var item = items.SingleOrDefault(i => i.Id == id);
         if (item == null)

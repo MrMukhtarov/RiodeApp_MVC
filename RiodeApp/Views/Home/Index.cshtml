@@ -1,4 +1,7 @@
-﻿@{
+﻿@section styles{
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+}
+@{
     ViewData["Title"] = "Home Page";
 }
 @model HomeVM
@@ -674,32 +677,9 @@
 </main>
 <!-- End of Main -->
 @section scripts{
-    @*<script>
-        let take = 4;
-        let skip = 4;
-        $(".load-more").click(e => {
-            e.preventDefault();
-            if ($('#prodCount').val() == $('.feat-prod').length) {
-                e.target.remove()
-            }
-            else {
-                fetch(`${e.target.href}?take=${take}&skip=${skip}`)
-                    .then(data => data.text())
-                    .then(res => {
-                        $(".featured--div").append(res)
-                        skip += 4;
-                        if ($('#prodCount').val() == $('.feat-prod').length) {
-                            e.target.remove()
-                        }
-                    })
-                    .catch(e => console.log(e))
-            }
-
-        })
-    </script>*@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>
-        let prods = document.querySelectorAll(".feat-prod .d-icon-bagt");
+        let prods = document.querySelectorAll(".feat-prod .d-icon-bag");
         document.getElementById('myTabContent').addEventListener("click", e => {
             e.preventDefault();
             if (e.srcElement.classList.contains("d-icon-bag")) {
@@ -730,7 +710,6 @@
                         }
                         else {
                             Command: toastr["error"]("Bir xəta baş verdi -else")
-
                             toastr.options = {
                                 "closeButton": false,
                                 "debug": false,
@@ -775,6 +754,10 @@
             if (e.target.tagName.toLowerCase() === 'a') {
                 window.location.href = e.target.href;
             }
-        })
-    </script>
+        })</script>
+        <script>
+            document.querySelector(".cartClick").addEventListener('click', e => {
+                e.preventDefault();
+            })
+        </script>
 }

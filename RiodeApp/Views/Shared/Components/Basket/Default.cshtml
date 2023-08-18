@@ -16,7 +16,7 @@
                 <div class="product-detail">
                     <a asp-action="Detail" asp-controller="Shop" class="product-name">@item.Product.Name</a>
                     <div class="price-box">
-                        <span class="product-quantity">1</span>
+                        <span class="product-quantity">@item.Count</span>
                         <div class="product-price">
                             @if (item.Product.Discount > 0)
                             {

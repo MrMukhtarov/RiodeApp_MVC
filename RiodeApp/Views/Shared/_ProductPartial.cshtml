@@ -10,7 +10,8 @@
                          height="345">
                 </a>
                 <div class="product-action-vertical">
-                    <a href="#" class="btn-product-icon btn-cart" data-toggle="modal"
+                    <a id="cartClick" asp-action="AddBasket" asp-controller="Home" asp-route-id="@item.Id"
+                       class="btn-product-icon btn-cart" data-toggle="modal"
                        data-target="#addCartModal" title="Add to cart">
                         <i class="d-icon-bag"></i>
                     </a>
@@ -70,4 +71,11 @@
             </div>
         </div>
     </div>
+}
+@section scripts{
+    <script>
+        document.querySelector(".cartClick").addEventListener('click', e => {
+            e.preventDefault();
+        })
+    </script>
 }

@@ -21,8 +21,7 @@ public class BasketViewComponent : ViewComponent
         List<BasketItemVM> items = new();
         if (_contextAccessor.HttpContext.Request.Cookies["basket"] != null)
         {
-            items = JsonConvert.DeserializeObject<List<BasketItemVM>>
-                (_contextAccessor.HttpContext.Request.Cookies["basket"]);
+            items = JsonConvert.DeserializeObject<List<BasketItemVM>>(_contextAccessor.HttpContext.Request.Cookies["basket"]);
         }
         List<BasketItemProductVM> products = new List<BasketItemProductVM>();
         float sum = 0;
@@ -30,8 +29,7 @@ public class BasketViewComponent : ViewComponent
         {   
             var prodItem = new BasketItemProductVM() 
             {
-                Product = await _context.Products.Include(p => p.ProductImages).
-                SingleOrDefaultAsync(p => p.Id == item.Id),
+                Product = await _context.Products.Include(p => p.ProductImages).SingleOrDefaultAsync(p => p.Id == item.Id),
                 Count = item.Count
             };
             sum += (float)((prodItem.Product.Price * (100 - prodItem.Product.Discount) / 100) * item.Count);
