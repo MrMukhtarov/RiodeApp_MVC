@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using RiodeApp.Models;
 
 namespace RiodeApp.DataAccess;
 
-public class RiodeDbContext : DbContext
+public class RiodeDbContext : IdentityDbContext
 {
     public RiodeDbContext(DbContextOptions options) : base(options) { }
 
@@ -14,4 +15,6 @@ public class RiodeDbContext : DbContext
     public DbSet<ProductCategory> ProductCategories { get; set; }
     public DbSet<Color> Colors { get; set; }
     public DbSet<ProductColor> ProductColors { get; set; }
+    public DbSet<AppUser> AppUsers { get; set; }
+    public DbSet<UserToken> UserTokens { get; set; }
 }

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "v8nVZO4iD4Cpuudf8FwRqporBBB2ByZ+S8eq/hs0EoA=",
+  "Hash": "sTMnlCGhMhET+zOO4D42GMR2VDaHMLbf+rVp/zHlXjQ=",
   "Source": "RiodeApp",
   "BasePath": "_content/RiodeApp",
   "Mode": "Default",
@@ -77654,6 +77654,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Assets\\video\\memory-of-a-woman.mp4"
+    },
+    {
+      "Identity": "C:\\Users\\hp\\Desktop\\RiodeApp\\RiodeApp\\wwwroot\\EmailConfirmation.html",
+      "SourceId": "RiodeApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\hp\\Desktop\\RiodeApp\\RiodeApp\\wwwroot\\",
+      "BasePath": "_content/RiodeApp",
+      "RelativePath": "EmailConfirmation.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\EmailConfirmation.html"
     }
   ]
 }
