@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using NuGet.Versioning;
 using RiodeApp.DataAccess;
+using RiodeApp.Models;
 using RiodeApp.Services.Interfaces;
 using RiodeApp.ViewModels.BasketVMs;
+using RiodeApp.ViewModels.CategoryVMs;
 using RiodeApp.ViewModels.HomeVMs;
 
 namespace RiodeApp.Controllers;
@@ -13,13 +16,15 @@ public class HomeController : Controller
     readonly ISliderService _sliderService;
     readonly IProductService _productService;
     readonly ICategoryService _categoryService;
+    readonly RiodeDbContext _context;
 
     public HomeController(ISliderService sliderService, IProductService productService,
-        ICategoryService categoryService)
+        ICategoryService categoryService, RiodeDbContext context)
     {
         _sliderService = sliderService;
         _productService = productService;
         _categoryService = categoryService;
+        _context = context;
     }
 
     public async Task<IActionResult> Index()
@@ -73,4 +78,16 @@ public class HomeController : Controller
         ViewBag.ProductCount = await _productService.GetTable.CountAsync();
         return PartialView("_BasketPartial", vm);
     }
+    //public async Task<IActionResult> ShowCategoryCount()
+    //{
+    //    List<ShowCount> categoriesWithProductCounts = await _context.Categories
+    //        .Select(c => new ShowCount
+    //        {
+    //            Name = c.Name,
+    //            Count = c.ProductCategories.Count
+    //        })
+    //        .ToListAsync();
+
+    //    return PartialView("__HomeCategoryPartial", categoriesWithProductCounts);
+    //}
 }

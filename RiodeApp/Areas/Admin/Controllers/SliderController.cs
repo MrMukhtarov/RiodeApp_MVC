@@ -1,10 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RiodeApp.Extensions;
 using RiodeApp.Services.Interfaces;
 using RiodeApp.ViewModels.SliderVMs;
+using System.Data;
 
 namespace RiodeApp.Areas.Admin.Controllers;
+
 [Area("Admin")]
+[Authorize(Roles = "Admin ,Editor")]
 public class SliderController : Controller
 {
     readonly ISliderService _sliderService;

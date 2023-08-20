@@ -1,12 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RiodeApp.DataAccess;
 using RiodeApp.Services.Interfaces;
 using RiodeApp.ViewModels.CategoryVMs;
+using System.Data;
 using System.Runtime.Intrinsics.X86;
 
 namespace RiodeApp.Areas.Admin.Controllers;
 [Area("Admin")]
+[Authorize(Roles = "Admin ,Editor")]
+
 public class CategoryController : Controller
 {
     readonly ICategoryService _categoryService;

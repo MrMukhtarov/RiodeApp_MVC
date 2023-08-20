@@ -76,7 +76,8 @@
                     </div>
                 }
             </div>
-            <partial name="_HomeCategoryPartial" model="Model.Categories"></partial>
+            @*<partial name="_HomeCategoryPartial" model="Model.Categories"></partial>*@
+            @await Component.InvokeAsync("CategoryHome")
 
         </section>
 

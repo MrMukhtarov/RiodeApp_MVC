@@ -22,7 +22,7 @@ builder.Services.AddDbContext<RiodeDbContext>(opt =>
     opt.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789._";
     opt.Password.RequireNonAlphanumeric = false;
     opt.Password.RequiredLength = 8;
-    opt.Lockout.MaxFailedAccessAttempts = 1;
+    opt.Lockout.MaxFailedAccessAttempts = 3;
     opt.User.RequireUniqueEmail = true;
     opt.SignIn.RequireConfirmedEmail = true;
 }).AddDefaultTokenProviders().AddEntityFrameworkStores<RiodeDbContext>();

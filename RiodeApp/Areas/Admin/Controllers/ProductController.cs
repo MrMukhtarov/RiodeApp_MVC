@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RiodeApp.Extensions;
 using RiodeApp.Services.Interfaces;
 using RiodeApp.ViewModels.ProductVMs;
+using System.Data;
 
 namespace RiodeApp.Areas.Admin.Controllers;
 [Area("Admin")]
+[Authorize(Roles = "Admin ,Editor")]
 public class ProductController : Controller
 {
     readonly IProductService _productService;

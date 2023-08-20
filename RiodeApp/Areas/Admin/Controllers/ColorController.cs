@@ -1,11 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RiodeApp.Services.Implements;
 using RiodeApp.Services.Interfaces;
 using RiodeApp.ViewModels.ColorVMs;
+using System.Data;
 
 namespace RiodeApp.Areas.Admin.Controllers;
 [Area("Admin")]
+[Authorize(Roles = "Admin ,Editor")]
+
 public class ColorController : Controller
 {
     readonly IColorService _colorServoce;

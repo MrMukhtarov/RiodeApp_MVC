@@ -167,7 +167,7 @@ public class AuthController : Controller
         {
             return Redirect(ReturnUrl);
         }
-    }
+    }   
     public async Task<IActionResult> Signout()
     {
         await _signInManager.SignOutAsync();
